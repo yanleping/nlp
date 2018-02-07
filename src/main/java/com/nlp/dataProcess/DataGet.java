@@ -1,12 +1,14 @@
 package com.nlp.dataProcess;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.nlp.dao.AticleDetailMapper;
 import com.nlp.pojo.AticleDetail;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.io.BufferedReader;
@@ -18,7 +20,7 @@ import java.net.URL;
 
 public class DataGet {
 
-    @Resource
+    @Autowired
     private AticleDetailMapper aticleDetailMapper;
 
     private static Logger logger = LoggerFactory.getLogger(DataGet.class);
@@ -26,10 +28,8 @@ public class DataGet {
     public void save(String url){
         //根据ID从每日一读API中读取文章数据
         String unicodeStr = this.getText(url);
-        //将获取到的unicode数据转化为中文json字符串
-        String jsonStr = this.unicode2String(unicodeStr);
         //将文章数据保存到数据库
-        this.saveData(jsonStr);
+        this.saveData(unicodeStr);
     }
 
     /** 从每日一读的API接口中获取文本数据 */
@@ -90,9 +90,20 @@ public class DataGet {
      *
      */
     public void saveData(String aticle){
+        AticleDetail aticleDetail = new AticleDetail();
 
-        AticleDetail aticleDetail = JSON.parseObject(aticle, new TypeReference<AticleDetail>() {});
-        System.out.println(aticleDetail.getAuthor());
+        JSONObject jsonObject = JSON.parseObject(aticle);
+        String str = jsonObject.getString("data");
+
+        JSONObject jsonObject1 = JSON.parseObject(str);
+
+        aticleDetail.setAuthor(jsonObject1.getString("author"));
+        aticleDetail.setContent(jsonObject1.getString("content"));
+        aticleDetail.setTitle(jsonObject1.getString("title"));
+        aticleDetail.setCordcount(jsonObject1.getInteger("wc"));
+        aticleDetail.setDigest(jsonObject1.getString("digest"));
+
+        aticleDetailMapper.insertSelective(aticleDetail);
 
     }
 
