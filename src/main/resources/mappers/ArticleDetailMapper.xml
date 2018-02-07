@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nlp.dao.ArticleDetailMapper">
+  <resultMap id="BaseResultMap" type="com.nlp.pojo.ArticleDetail">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="author" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="digest" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="cordCount" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, author, title, digest, content, cordCount
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from article_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from article_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nlp.pojo.ArticleDetail">
+    insert into article_detail (id, author, title, 
+      digest, content, cordCount
+      )
+    values (#{id,jdbcType=BIGINT}, #{author,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{digest,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{cordcount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nlp.pojo.ArticleDetail">
+    insert into article_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="digest != null">
+        digest,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="cordcount != null">
+        cordCount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="digest != null">
+        #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="cordcount != null">
+        #{cordcount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nlp.pojo.ArticleDetail">
+    update article_detail
+    <set>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="digest != null">
+        digest = #{digest,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="cordcount != null">
+        cordCount = #{cordcount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nlp.pojo.ArticleDetail">
+    update article_detail
+    set author = #{author,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      digest = #{digest,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      cordCount = #{cordcount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
