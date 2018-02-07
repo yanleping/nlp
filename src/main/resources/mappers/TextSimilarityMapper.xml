@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.nlp.dao.TextSimilarityMapper" >
-  <resultMap id="BaseResultMap" type="com.nlp.pojo.TextSimilarity" >
+<mapper namespace="com.nlp.app.dao.TextSimilarityMapper" >
+  <resultMap id="BaseResultMap" type="com.nlp.app.pojo.TextSimilarity" >
     <constructor >
       <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="text1_id" jdbcType="BIGINT" javaType="java.lang.Long" />
@@ -22,13 +22,13 @@
     delete from text_similarity
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.nlp.pojo.TextSimilarity" >
+  <insert id="insert" parameterType="com.nlp.app.pojo.TextSimilarity" >
     insert into text_similarity (id, text1_id, text2_id, 
       similarityValue)
     values (#{id,jdbcType=BIGINT}, #{text1Id,jdbcType=BIGINT}, #{text2Id,jdbcType=BIGINT}, 
       #{similarityvalue,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.nlp.pojo.TextSimilarity" >
+  <insert id="insertSelective" parameterType="com.nlp.app.pojo.TextSimilarity" >
     insert into text_similarity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -59,7 +59,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.nlp.pojo.TextSimilarity" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.nlp.app.pojo.TextSimilarity" >
     update text_similarity
     <set >
       <if test="text1Id != null" >
@@ -74,7 +74,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.nlp.pojo.TextSimilarity" >
+  <update id="updateByPrimaryKey" parameterType="com.nlp.app.pojo.TextSimilarity" >
     update text_similarity
     set text1_id = #{text1Id,jdbcType=BIGINT},
       text2_id = #{text2Id,jdbcType=BIGINT},

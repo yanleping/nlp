@@ -2,6 +2,8 @@ package com.nlp.app.datapro;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.nlp.app.dao.ArticleDetailMapper;
+import com.nlp.app.pojo.ArticleDetail;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +14,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import com.nlp.app.dao.ArticleDetailMapper;
-import com.nlp.app.pojo.ArticleDetail;
 
 
 public class DataGet {
@@ -88,7 +88,7 @@ public class DataGet {
      *
      */
     public void saveData(String aticle){
-    		ArticleDetail aticleDetail = new ArticleDetail();
+        ArticleDetail aticleDetail = new ArticleDetail();
 
         JSONObject jsonObject = JSON.parseObject(aticle);
         String str = jsonObject.getString("data");
@@ -98,7 +98,7 @@ public class DataGet {
         aticleDetail.setAuthor(jsonObject1.getString("author"));
         aticleDetail.setContent(jsonObject1.getString("content"));
         aticleDetail.setTitle(jsonObject1.getString("title"));
-        aticleDetail.setCordcount(jsonObject1.getInteger("wc"));
+        aticleDetail.setWordcount(jsonObject1.getInteger("wc"));
         aticleDetail.setDigest(jsonObject1.getString("digest"));
 
         articleDetailMapper.insertSelective(aticleDetail);

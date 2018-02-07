@@ -4,7 +4,6 @@ import com.nlp.app.dao.ArticleDetailMapper;
 import com.nlp.app.dao.TextSimilarityMapper;
 import com.nlp.app.pojo.ArticleDetail;
 import com.nlp.app.pojo.TextSimilarity;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

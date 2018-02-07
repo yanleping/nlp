@@ -11,15 +11,15 @@ public class ArticleDetail {
 
     private String content;
 
-    private Integer cordcount;
+    private Integer wordcount;
 
-    public ArticleDetail(Long id, String author, String title, String digest, String content, Integer cordcount) {
+    public ArticleDetail(Long id, String author, String title, String digest, String content, Integer wordcount) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.digest = digest;
         this.content = content;
-        this.cordcount = cordcount;
+        this.wordcount = wordcount;
     }
 
     public ArticleDetail() {
@@ -66,11 +66,11 @@ public class ArticleDetail {
         this.content = content == null ? null : content.trim();
     }
 
-    public Integer getCordcount() {
-        return cordcount;
+    public Integer getWordcount() {
+        return wordcount;
     }
 
-    public void setCordcount(Integer cordcount) {
-        this.cordcount = cordcount;
+    public void setWordcount(Integer wordcount) {
+        this.wordcount = wordcount;
     }
 }
