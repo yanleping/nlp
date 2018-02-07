@@ -1,5 +1,7 @@
 package com.nlp.datapro;
 
+import com.nlp.app.datapro.DataGet;
+
 public class DataGetTest {
 
     public static void main(String[] args){

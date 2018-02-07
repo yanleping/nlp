@@ -1,6 +1,6 @@
-package com.nlp.dao;
+package com.nlp.app.dao;
 
-import com.nlp.pojo.TextSimilarity;
+import com.nlp.app.pojo.TextSimilarity;
 
 public interface TextSimilarityMapper {
     int deleteByPrimaryKey(Long id);

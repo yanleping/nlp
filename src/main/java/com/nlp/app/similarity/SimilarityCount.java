@@ -1,4 +1,4 @@
-package com.nlp.similarity;
+package com.nlp.app.similarity;
 
 import org.springframework.stereotype.Service;
 

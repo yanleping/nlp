@@ -1,4 +1,4 @@
-package com.nlp.pojo;
+package com.nlp.app.pojo;
 
 public class ArticleDetail {
     private Long id;

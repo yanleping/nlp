@@ -1,6 +1,6 @@
-package com.nlp.dao;
+package com.nlp.app.dao;
 
-import com.nlp.pojo.ArticleDetail;
+import com.nlp.app.pojo.ArticleDetail;
 
 public interface ArticleDetailMapper {
     int deleteByPrimaryKey(Long id);
