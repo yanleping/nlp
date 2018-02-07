@@ -2,7 +2,8 @@ package com.nlp.datapro;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.nlp.dao.AticleDetailMapper;
+import com.nlp.dao.ArticleDetailMapper;
+import com.nlp.pojo.ArticleDetail;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +20,7 @@ public class DataGet {
     private static Logger logger = LoggerFactory.getLogger(DataGet.class);
 
     @Autowired
-    private AticleDetailMapper aticleDetailMapper;
-
+    private ArticleDetailMapper articleDetailMapper;
 
     public void save(String url){
         //根据ID从每日一读API中读取文章数据
@@ -87,7 +87,7 @@ public class DataGet {
      *
      */
     public void saveData(String aticle){
-        AticleDetail aticleDetail = new AticleDetail();
+        ArticleDetail aticleDetail = new ArticleDetail();
 
         JSONObject jsonObject = JSON.parseObject(aticle);
         String str = jsonObject.getString("data");
@@ -100,7 +100,7 @@ public class DataGet {
         aticleDetail.setCordcount(jsonObject1.getInteger("wc"));
         aticleDetail.setDigest(jsonObject1.getString("digest"));
 
-        aticleDetailMapper.insertSelective(aticleDetail);
+        articleDetailMapper.insertSelective(aticleDetail);
 
     }
 
