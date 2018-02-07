@@ -1,4 +1,4 @@
-package com.nlp.demo;
+package com.nlp.config;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionFactoryBean;

@@ -1,4 +1,4 @@
-package com.nlp.pojo;
+package com.nlp.app.pojo;
 
 import java.math.BigDecimal;
 
