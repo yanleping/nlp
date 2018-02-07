@@ -10,3 +10,14 @@ CREATE TABLE `aticle_detail` (
   KEY `author_index` (`author`) USING BTREE,
   KEY `title_index` (`title`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+#文本相似度查询表
+CREATE TABLE `text_similarity` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `text1_id` int(11) DEFAULT NULL COMMENT '文本1的id',
+  `text2_id` int(11) DEFAULT NULL COMMENT '文本2的id',
+  `similarityValue` decimal(10,10) DEFAULT NULL COMMENT '相似度的值',
+  PRIMARY KEY (`id`),
+  KEY `text1_index` (`text1_id`) USING BTREE,
+  KEY `text2_index` (`text2_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

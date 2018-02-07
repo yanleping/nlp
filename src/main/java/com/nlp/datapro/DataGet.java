@@ -1,16 +1,13 @@
-package com.nlp.dataProcess;
+package com.nlp.datapro;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.nlp.dao.AticleDetailMapper;
-import com.nlp.pojo.AticleDetail;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,11 +16,11 @@ import java.net.URL;
 
 
 public class DataGet {
+    private static Logger logger = LoggerFactory.getLogger(DataGet.class);
 
     @Autowired
     private AticleDetailMapper aticleDetailMapper;
 
-    private static Logger logger = LoggerFactory.getLogger(DataGet.class);
 
     public void save(String url){
         //根据ID从每日一读API中读取文章数据

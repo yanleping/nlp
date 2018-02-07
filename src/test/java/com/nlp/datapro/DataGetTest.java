@@ -1,4 +1,4 @@
-package com.nlp.dataProcess;
+package com.nlp.datapro;
 
 public class DataGetTest {
 
