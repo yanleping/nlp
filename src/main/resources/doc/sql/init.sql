@@ -12,7 +12,7 @@ create table article
    author               varchar(200) comment '作者',
    title                varchar(500) comment '标题',
    digest               varchar(1000) comment '文章缩略',
-   context              text comment '文章内容',
+   content              text comment '文章内容',
    word_count           int comment '文章字数',
    create_time          datetime comment '创建时间',
    primary key (id)
