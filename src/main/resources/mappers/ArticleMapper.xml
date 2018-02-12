@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.nlp.app.dao.ArticleDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.nlp.app.pojo.ArticleDetail" >
+<mapper namespace="com.nlp.app.dao.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.nlp.app.pojo.Article" >
     <constructor >
       <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="wid" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="author" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="digest" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="wordCount" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="word_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, author, title, digest, content, wordCount
+    id, wid, author, title, digest, content, word_count, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from article_detail
+    from article
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from article_detail
+    delete from article
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.nlp.app.pojo.ArticleDetail" >
-    insert into article_detail (id, author, title, 
-      digest, content, wordCount
-      )
-    values (#{id,jdbcType=BIGINT}, #{author,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{digest,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{wordcount,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.nlp.app.pojo.Article" >
+    insert into article (id, wid, author, 
+      title, digest, content, 
+      word_count, create_time)
+    values (#{id,jdbcType=BIGINT}, #{wid,jdbcType=BIGINT}, #{author,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{digest,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{wordCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.nlp.app.pojo.ArticleDetail" >
-    insert into article_detail
+  <insert id="insertSelective" parameterType="com.nlp.app.pojo.Article" >
+    insert into article
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="wid != null" >
+        wid,
       </if>
       <if test="author != null" >
         author,
@@ -50,13 +55,19 @@
       <if test="content != null" >
         content,
       </if>
-      <if test="wordcount != null" >
-        wordCount,
+      <if test="wordCount != null" >
+        word_count,
+      </if>
+      <if test="createTime != null" >
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wid != null" >
+        #{wid,jdbcType=BIGINT},
       </if>
       <if test="author != null" >
         #{author,jdbcType=VARCHAR},
@@ -70,14 +81,20 @@
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="wordcount != null" >
-        #{wordcount,jdbcType=INTEGER},
+      <if test="wordCount != null" >
+        #{wordCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.nlp.app.pojo.ArticleDetail" >
-    update article_detail
+  <update id="updateByPrimaryKeySelective" parameterType="com.nlp.app.pojo.Article" >
+    update article
     <set >
+      <if test="wid != null" >
+        wid = #{wid,jdbcType=BIGINT},
+      </if>
       <if test="author != null" >
         author = #{author,jdbcType=VARCHAR},
       </if>
@@ -90,19 +107,24 @@
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="wordcount != null" >
-        wordCount = #{wordcount,jdbcType=INTEGER},
+      <if test="wordCount != null" >
+        word_count = #{wordCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.nlp.app.pojo.ArticleDetail" >
-    update article_detail
-    set author = #{author,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.nlp.app.pojo.Article" >
+    update article
+    set wid = #{wid,jdbcType=BIGINT},
+      author = #{author,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       digest = #{digest,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
-      wordCount = #{wordcount,jdbcType=INTEGER}
+      word_count = #{wordCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

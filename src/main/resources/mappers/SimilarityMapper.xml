@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nlp.app.dao.SimilarityMapper" >
+  <resultMap id="BaseResultMap" type="com.nlp.app.pojo.Similarity" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="current_work_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="target_work_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="similarity" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, current_work_id, target_work_id, similarity
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from similarity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from similarity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.nlp.app.pojo.Similarity" >
+    insert into similarity (id, current_work_id, target_work_id, 
+      similarity)
+    values (#{id,jdbcType=BIGINT}, #{currentWorkId,jdbcType=BIGINT}, #{targetWorkId,jdbcType=BIGINT}, 
+      #{similarity,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nlp.app.pojo.Similarity" >
+    insert into similarity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="currentWorkId != null" >
+        current_work_id,
+      </if>
+      <if test="targetWorkId != null" >
+        target_work_id,
+      </if>
+      <if test="similarity != null" >
+        similarity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="currentWorkId != null" >
+        #{currentWorkId,jdbcType=BIGINT},
+      </if>
+      <if test="targetWorkId != null" >
+        #{targetWorkId,jdbcType=BIGINT},
+      </if>
+      <if test="similarity != null" >
+        #{similarity,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nlp.app.pojo.Similarity" >
+    update similarity
+    <set >
+      <if test="currentWorkId != null" >
+        current_work_id = #{currentWorkId,jdbcType=BIGINT},
+      </if>
+      <if test="targetWorkId != null" >
+        target_work_id = #{targetWorkId,jdbcType=BIGINT},
+      </if>
+      <if test="similarity != null" >
+        similarity = #{similarity,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nlp.app.pojo.Similarity" >
+    update similarity
+    set current_work_id = #{currentWorkId,jdbcType=BIGINT},
+      target_work_id = #{targetWorkId,jdbcType=BIGINT},
+      similarity = #{similarity,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

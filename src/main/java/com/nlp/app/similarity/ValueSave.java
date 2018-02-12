@@ -1,9 +1,9 @@
 package com.nlp.app.similarity;
 
-import com.nlp.app.dao.ArticleDetailMapper;
-import com.nlp.app.dao.TextSimilarityMapper;
-import com.nlp.app.pojo.ArticleDetail;
-import com.nlp.app.pojo.TextSimilarity;
+import com.nlp.app.dao.ArticleMapper;
+import com.nlp.app.dao.SimilarityMapper;
+import com.nlp.app.pojo.Article;
+import com.nlp.app.pojo.Similarity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +14,10 @@ public class ValueSave {
     private static Logger logger = LoggerFactory.getLogger(ValueSave.class);
 
     @Autowired
-    private TextSimilarityMapper textSimilarityMapper;
+    private SimilarityMapper textSimilarityMapper;
 
     @Autowired
-    private ArticleDetailMapper articleDetailMapper;
+    private ArticleMapper articleDetailMapper;
 
     @Autowired
     SimilarityCount similarityCount;
@@ -28,7 +28,7 @@ public class ValueSave {
      * @param id
      * @return
      */
-    public ArticleDetail getArticleById(Long id){
+    public Article getArticleById(Long id){
         return articleDetailMapper.selectByPrimaryKey(id);
     }
 
@@ -39,14 +39,14 @@ public class ValueSave {
      */
     public void save(Long text1Id,Long text2Id){
 
-        ArticleDetail text1 = this.getArticleById(text1Id);
-        ArticleDetail text2 = this.getArticleById(text2Id);
+        Article text1 = this.getArticleById(text1Id);
+        Article text2 = this.getArticleById(text2Id);
 
         BigDecimal value = similarityCount.textSimilarty(text1.getContent(),text2.getContent());
-        TextSimilarity textSimilarity = new TextSimilarity();
-        textSimilarity.setText1Id(text1.getId());
-        textSimilarity.setText2Id(text2.getId());
-        textSimilarity.setSimilarityvalue(value);
+        Similarity textSimilarity = new Similarity();
+        textSimilarity.setCurrentWorkId(text1.getId());
+        textSimilarity.setTargetWorkId(text2.getId());
+        textSimilarity.setSimilarity(value);
         try {
             textSimilarityMapper.insert(textSimilarity);
         }catch(Exception e){

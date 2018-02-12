@@ -1,7 +1,11 @@
 package com.nlp.app.pojo;
 
-public class ArticleDetail {
+import java.util.Date;
+
+public class Article {
     private Long id;
+
+    private Long wid;
 
     private String author;
 
@@ -11,18 +15,22 @@ public class ArticleDetail {
 
     private String content;
 
-    private Integer wordcount;
+    private Integer wordCount;
 
-    public ArticleDetail(Long id, String author, String title, String digest, String content, Integer wordcount) {
+    private Date createTime;
+
+    public Article(Long id, Long wid, String author, String title, String digest, String content, Integer wordCount, Date createTime) {
         this.id = id;
+        this.wid = wid;
         this.author = author;
         this.title = title;
         this.digest = digest;
         this.content = content;
-        this.wordcount = wordcount;
+        this.wordCount = wordCount;
+        this.createTime = createTime;
     }
 
-    public ArticleDetail() {
+    public Article() {
         super();
     }
 
@@ -32,6 +40,14 @@ public class ArticleDetail {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getWid() {
+        return wid;
+    }
+
+    public void setWid(Long wid) {
+        this.wid = wid;
     }
 
     public String getAuthor() {
@@ -66,11 +82,19 @@ public class ArticleDetail {
         this.content = content == null ? null : content.trim();
     }
 
-    public Integer getWordcount() {
-        return wordcount;
+    public Integer getWordCount() {
+        return wordCount;
     }
 
-    public void setWordcount(Integer wordcount) {
-        this.wordcount = wordcount;
+    public void setWordCount(Integer wordCount) {
+        this.wordCount = wordCount;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

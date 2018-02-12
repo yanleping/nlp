@@ -17,8 +17,8 @@ import javax.sql.DataSource;
 
 @EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan
-@MapperScan("com.nlp.dao")
+@ComponentScan(basePackages={"com.nlp.app"})
+@MapperScan("com.nlp.app.dao")
 public class Application {
 	private static Logger logger = Logger.getLogger(Application.class);
 

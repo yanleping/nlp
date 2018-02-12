@@ -11,7 +11,7 @@ CREATE TABLE `article_detail` (
   KEY `title_index` (`title`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#文本相似度查询表
+# 文本相似度查询表
 CREATE TABLE `text_similarity` (
   `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
   `text1_id` bigint(11) DEFAULT NULL COMMENT '文本1的id',
