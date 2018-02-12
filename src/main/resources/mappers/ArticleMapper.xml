@@ -89,6 +89,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.nlp.app.pojo.Article" >
     update article
     <set >
@@ -127,4 +128,19 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectArticleByAutOrTit" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from article
+    where author LIKE #{name} or title LIKE #{name}}
+  </select>
+
+  <select id="queryList" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from article
+    limit (#{pageNo}-1)*#{pageSize},#{pageSize}}
+  </select>
+
 </mapper>

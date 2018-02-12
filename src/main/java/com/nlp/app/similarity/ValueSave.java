@@ -1,5 +1,7 @@
 package com.nlp.app.similarity;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.nlp.app.dao.ArticleMapper;
 import com.nlp.app.dao.SimilarityMapper;
 import com.nlp.app.pojo.Article;
@@ -7,9 +9,14 @@ import com.nlp.app.pojo.Similarity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+@Service("valueSave")
 public class ValueSave {
     private static Logger logger = LoggerFactory.getLogger(ValueSave.class);
 
@@ -28,8 +35,28 @@ public class ValueSave {
      * @param id
      * @return
      */
+
     public Article getArticleById(Long id){
         return articleDetailMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 根据作者名或者文章标题模糊查询
+     * @param name
+     * @return
+     */
+    public Article getArticleByAutOrTit(String name){
+        return articleDetailMapper.selectArticleByAutOrTit(name);
+    }
+
+    public PageInfo<Article> selectPage(Integer pageNo,Integer pageSize){
+        pageNo = pageNo == null ? 1 : pageNo;
+        pageSize = pageSize == null ? 10 : pageSize;
+        PageHelper.startPage(pageNo, pageSize);
+        List<Article> list = articleDetailMapper.queryList(pageNo,pageSize);
+        PageInfo pageInfo = new PageInfo(list);
+
+        return pageInfo;
     }
 
     /**
