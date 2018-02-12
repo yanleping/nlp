@@ -45,7 +45,9 @@ public class ValueSave {
      * @param name
      * @return
      */
-    public Article getArticleByAutOrTit(String name){
+    public List<Article> getArticleByAutOrTit(String name){
+        name = "%"+name+"%";
+
         return articleDetailMapper.selectArticleByAutOrTit(name);
     }
 
@@ -53,7 +55,8 @@ public class ValueSave {
         pageNo = pageNo == null ? 1 : pageNo;
         pageSize = pageSize == null ? 10 : pageSize;
         PageHelper.startPage(pageNo, pageSize);
-        List<Article> list = articleDetailMapper.queryList(pageNo,pageSize);
+        Integer start = (pageNo-1)*pageSize;
+        List<Article> list = articleDetailMapper.queryList(start,pageSize);
         PageInfo pageInfo = new PageInfo(list);
 
         return pageInfo;

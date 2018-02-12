@@ -14,11 +14,11 @@ public interface ArticleMapper {
 
     Article selectByPrimaryKey(Long id);
 
-    Article selectArticleByAutOrTit(@Param("name") String name);
+    List<Article> selectArticleByAutOrTit(@Param("name") String name);
 
     int updateByPrimaryKeySelective(Article record);
 
     int updateByPrimaryKey(Article record);
 
-    List<Article> queryList(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
+    List<Article> queryList(@Param("start") Integer start, @Param("pageSize") Integer pageSize);
 }

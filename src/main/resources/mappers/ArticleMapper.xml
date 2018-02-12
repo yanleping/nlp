@@ -129,18 +129,20 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectArticleByAutOrTit" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectArticleByAutOrTit" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from article
-    where author LIKE #{name} or title LIKE #{name}}
+    where author LIKE #{name} or title LIKE #{name}
+    -- where author LIKE like CONCAT('%','${name}','%' )  or title LIKE CONCAT('%','${name}','%' )
+    limit 0,10
   </select>
 
   <select id="queryList" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from article
-    limit (#{pageNo}-1)*#{pageSize},#{pageSize}}
+    limit #{start},#{pageSize}
   </select>
 
 </mapper>
