@@ -1,5 +1,7 @@
 package com.nlp.app.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class Article {
@@ -17,6 +19,7 @@ public class Article {
 
     private Integer wordCount;
 
+    @JSONField(format="yyyy-MM-dd")
     private Date createTime;
 
     public Article(Long id, Long wid, String author, String title, String digest, String content, Integer wordCount, Date createTime) {
